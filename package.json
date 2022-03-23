@@ -4,7 +4,9 @@
   "description": "## Versions / Dependencies",
   "main": "index.js",
   "scripts": {
-    "test": "jest --runInBand --detectOpenHandles --forceExit"
+    "test": "jest --detectOpenHandles --forceExit",
+    "setupFilesAfterEnv": "expect-puppeteer"
+  
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +22,7 @@
   },
   "dependencies": {
     "chai": "^4.3.6",
+    "expect-puppeteer": "^6.1.0",
     "puppeteer-core": "^13.5.1"
   }
 }

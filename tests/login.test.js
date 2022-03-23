@@ -18,7 +18,7 @@ describe("Login Page", () => {
             page = await browser.newPage(browser);
             login = new LoginPage(page);
         });
-        it("Check login error", async () => {
+        it.only("Check login error", async () => {
             await login.gotoPage();
             await login.enterFakeUserData('1','1');
             await login.clickLogin();

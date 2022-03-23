@@ -7,6 +7,7 @@ let page;
 let browser;
 let login;
 let product;
+let items;
 jest.setTimeout(35000);
 
 beforeAll(async()=> {
@@ -17,6 +18,7 @@ beforeAll(async()=> {
         await login.enterUserData();
         await login.clickLogin();
         product=new ProductPage(page);
+        items=await product.get_items();
     });
 
 
@@ -25,11 +27,21 @@ afterAll(() => {
 });
 
 describe("Product Page", () => {
-    describe("Check All Products And Add to Basket", () => {
-        it("Check All Items", async () => {
-            let el=await product.get_items();
-            console.log(el);
-        
+    describe("Check All Products And check Add,Remove in Basket", () => {
+        it.only("Check All Items", async () => {
+            expect(items.length).toEqual(6);
+        });
+        it("Add All Items to Basket", async () => {
+            await product.add_items_toBasket();
+            expect(parseInt(await product.get_items_inBasket())).toEqual(6);
+        });
+        it("Remove All Items from Basket", async () => {
+            await product.add_items_toBasket();
+            expect(await product.get_items_inBasket()).toEqual(0);
+        });
+        it.only("Sort A-Z", async () => {
+            await product.get_items();
+            product.get_items_name_sortA_Z();
         });
     });
 }); 
